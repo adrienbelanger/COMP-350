@@ -69,9 +69,27 @@ What are the two floating point numbers (neither is equal to 5) closest to 5?
 	\item smallest step after: 0 1000 100 = 6
 \end{itemize}
 
-\subsubsection*{g.}
-Given number -(10.1011)2
+\subsubsection*{g. \textcolor{red}{INCORRECT - REVIEW}}
+Given number $$-(10.1011)_2$$
 Round it to a binary8 number using the four rounding modes.
+
+\begin{itemize}
+    \item round down \newline
+        So, we know the first bit is negative, thus we need to round up our magnitude so it rounds towards $- \infty$. Let's then focus on rounding 10.1011 up. 
+        $$10.1011 = 1.01011 * 2^1$$
+        then \newline Exponent: 1000 since bias is 7. \newline 
+        Fraction: 011 since we round up \newline 
+        Thus: $1 1000 011$ is the number in binary8.
+    \item round up \newline
+        Here, we must round down the magnitude since it is negative.
+
+        1 1000 010
+    \item round to zero\newline
+        This would be $x_+$ since it is closer to 0 so 1 1000 010
+    \item round towards nearest\newline
+        The nearest would be $1 1000 011$.
+\end{itemize}
+
 \subsubsection*{h.}
  Find a real x
  in the range of subnormal numbers such that
@@ -95,11 +113,10 @@ If x is a finite floating point number, then $x \oplus x =2x$
 \subsection*{Question 4}
 
 What are the values of the expressions 
-\subsubsection*{a.} $-\inf/0$
-\subsubsection*{b.} $\inf/(-\inf)$
-\subsubsection*{c.} $3* \mathrm{NaN} - \mathrm{NaN}$
-\subsubsection*{d.} $0/(- \mathrm{NaN} )$
-
+\subsubsection*{a.} $-\infty/0 = \mathrm{NaN}$ 
+\subsubsection*{b.} $\infty/(-\infty) = \mathrm{NaN}$
+\subsubsection*{c.} $3* \mathrm{NaN} - \mathrm{NaN} = \mathrm{NaN}$
+\subsubsection*{d.} $0/(- \mathrm{NaN}) = \mathrm{NaN}$
 \vfill
 \newpage
 
