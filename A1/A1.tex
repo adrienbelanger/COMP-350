@@ -14,13 +14,12 @@
 \begin{document}
 
 \subsection*{Question 1}
-
 So, sign is - because of the first bit. Then, we flip the bits, add 1 and we add up the power of twos to get the number in decimal representing the magnitude. Combine with the negative symbol, and we have our number!
 \\ 
 1. Flip the bits
-$$11111111111111111111111111101010 = 000000000000000000000000000010101$$
+$$(11111111111111111111111111101010)_2 = (0000000000000000000000000000010101)_2$$
 2. Add 1
-$$00000000000000000000000000010101 + 1 = 00000000000000000000000000010110 $$
+$$(000000000000000000000000000010101 + 1)_2 = (000000000000000000000000000010110)_2 $$
 3. Calculate the magnitude 
 $$2^4 + 2^2 + 2^1 = 22$$
 4. Combine
@@ -32,88 +31,103 @@ Thus, our answer is $-22$.
 
 \subsection*{Question 2}
 
-Suppose we have a binary8 format which follows IEEE standard. In this format the width of the exponent field is 4, and the width of the fraction field is 3.
-
 \subsubsection*{a.}
 The exponent bias should be 7.
+
+
+
 \subsubsection*{b.}
 The machine espilon is 
 
-$$0 0111 001 - 0 0111 000 = \epsilon = 2^{-3} = 0.125$$
+$$(0 0111 001 - 0 0111 000)_2 = \epsilon = 2^{-3} = 0.125$$
 
-\subsubsection*{c.}
+\subsubsection*{c. }
 
-Largest: $0 1110 111 = 2^8 * (1 + 2^-1 + 2^-2 + 2^4) = 256 * 1.875 = 480$
+Largest: $(0 1110 111)_2 = 2^7 * (1 + 2^{-1} + 2^{-2} + 2^{-3}) = 128 * 1.875 = 240$
 \newline
-Smallest: $0 0001 000 = 1 * 2^{-7} = 0.0078125$
-\subsubsection*{d.}
+Smallest: $(0 0001 000)_2 = 1 * 2^{-6} = 0.015625$
 
-No, not all integers. For example, 479 cannot be stored.
-Proof: We can store 480, as seen above. However, the smallest step under would be 0 1110 110
-which is $2^8 * (1 + 2^-1 + 2^-2)_2 = 256 * 1.75 = 448$
+
+
+\subsubsection*{d. }
+No, not all integers. Proof by counterexample that not any integer can be represented. For example, 239 cannot be stored.
+We can store 240, as seen above. However, the smallest step under would be $(0 1110 110)_2$
+which is $2^7 * (1 + 2^{-1} + 2^{-2}) = 128 * 1.75 = 224$.
 \newline
-There are no steps in between. Thus, since 479 is an integer in between -480 and 480 and it cannot be represented, we conclude that there exist an integer which cannot exist in between the smallest and largest number in this system.
+Thus, since 239 is not representable, by contraditction we prove that not all ints are representable.
 
-\subsubsection*{e. \textcolor{red}{INCORRECT - REVIEW}} 
-largest: $0 0000 111 =2^{-7} * (2^{-2} + 2^{-4} + 2^{-8}) = 0.002471923828125 $
+
+
+
+\subsubsection*{e. } 
+
+largest: $(0 0000 111)_2 =2^{-6} * (2^{-1} + 2^{-2} + 2^{-3}) = 0.013671875 $
 \newline
-smallest: $0 0000 001 = 2^{-7} * 0.0078125 = {0.0000610352}$
+smallest: $(0 0000 001)_2 = 2^{-6} * 2^{-3} = 0.001953125$
 
-\subsubsection*{f. \textcolor{red}{INCORRECT - REVIEW}}
 
-What are the two floating point numbers (neither is equal to 5) closest to 5?
 
-5 is 0 1000 so
+
+\subsubsection*{f. }
+
+5 is $101_2$ so exponent is 2+7 = 9 so $(1001)_2$. Then, we have $(1.01)_2$ left so $(010)_2$ is the fraction, because of hidden bit normalization! So, $(5)_{10} = (0 1001 010)_2$.
 \begin{itemize}
-	\item largest step before: 0 1000 000 = 4
-	\item smallest step after: 0 1000 100 = 6
+	\item largest step before: $(0 1001 001)_2$
+	\item smallest step after: $(0 1001 011)_2$
 \end{itemize}
 
-\subsubsection*{g. \textcolor{red}{INCORRECT - REVIEW}}
-Given number $$-(10.1011)_2$$
-Round it to a binary8 number using the four rounding modes.
-
+\subsubsection*{g. }
 \begin{itemize}
     \item round down \newline
-        So, we know the first bit is negative, thus we need to round up our magnitude so it rounds towards $- \infty$. Let's then focus on rounding 10.1011 up. 
-        $$10.1011 = 1.01011 * 2^1$$
-        then \newline Exponent: 1000 since bias is 7. \newline 
-        Fraction: 011 since we round up \newline 
-        Thus: $1 1000 011$ is the number in binary8.
+        So, we know the first bit is negative, thus we need to round up our magnitude so it rounds towards $- \infty$. Let's then focus on rounding $(10.1011)_2$ up. 
+        $(10.1011)_2 = (1.01011)_2 * 2^1$
+        then \newline - Exponent: $(1000)_2$ since bias is 7. \newline 
+        - Fraction: $(011)_2$ since we round up \newline 
+        Thus: $(1 1000 011)_2$ is the number in binary8.
     \item round up \newline
         Here, we must round down the magnitude since it is negative.
 
-        1 1000 010
+        $(1 1000 010)_2$
     \item round to zero\newline
-        This would be $x_+$ since it is closer to 0 so 1 1000 010
+        This would be $x_+$ since it is closer to 0 so $(1 1000 010)_2$
     \item round towards nearest\newline
-        The nearest would be $1 1000 011$.
+        The nearest would be $(1 1000 011)_2$.
 \end{itemize}
 
-\subsubsection*{h.}
- Find a real x
- in the range of subnormal numbers such that
+\subsubsection*{h. }
+
+Lets try x smaller than subnormal, even if we might not be able to represent it. The smallest subnormal representable in binary8, as established before, is $2^{-6} * 2^{-3} = 2^{-9}$. We also established that the machine epsilon is 0.125. So, let's try with $x = 2^{-12}$.
+
 $$\frac{|round(x)-x|}{|x|}>12 \epsilon$$
+$$\frac{2^{-9}-2^{-12}}{2^{-12}}>1.5$$ assuming we round $2^{-12}$ to nearest subnormal so $2^{-9}$
+$$7>1.5$$ which holds. So x = $2^{-12}$ works!
 \vfill
 \newpage
 
-\subsection*{Question 3}
+\subsection*{Question 3 }
 
-Are the following statements true or false? If a statement is true, give a proof and if it's false, give a counterexample. We assume no overflow occurs in the calculations and the rounding mode used can be any of the four rounding modes.
+
 
 \subsubsection*{a.} 
-If x is a finite floating point number, then $x \oplus x =2x$
+True. Since $x \oplus x = \textrm{round}(x + x) = \textrm{round}(2x) = 2x$ since x is a finite fpn.
 
 \subsubsection*{b.} 
- If x and y are two finite floating point number, then $x\ominus y=-(y\ominus x)$.
 
+False. Let us pick $x = 1$ and $y = 2^{-4} = 0.0625$. We'll assume binary8.
+$$x \ominus y = \textrm{x - y} = \textrm{round}(1 - 0.0625) = \textrm{round}(0.9375)  = (0 0111 000)_2 = 1$$ using round up.
+
+Then, $$x \ominus x = -(y\ominus x) = -(\textrm{round}(0.0625 - 1))$$ Then, assuming round up again,
+
+$$ = -(\textrm{round}(0.0625 - 1)) = -\textrm{round}(-0.9375) = (0 0000 111)_2 = 0.875$$
+
+but $0.875 \neq 1$. Thus, this does not hold by counterexample.
 \vfill
 \newpage
 
-\subsection*{Question 4}
+\subsection*{Question 4 }
 
-What are the values of the expressions 
-\subsubsection*{a.} $-\infty/0 = \mathrm{NaN}$ 
+
+\subsubsection*{a.} $-\infty/0 = -\infty$ assuming positive 0.
 \subsubsection*{b.} $\infty/(-\infty) = \mathrm{NaN}$
 \subsubsection*{c.} $3* \mathrm{NaN} - \mathrm{NaN} = \mathrm{NaN}$
 \subsubsection*{d.} $0/(- \mathrm{NaN}) = \mathrm{NaN}$
